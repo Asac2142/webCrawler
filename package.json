@@ -1,0 +1,24 @@
+{
+  "name": "webcrawler",
+  "version": "1.0.0",
+  "description": "scrape data app on a website",
+  "main": "webCrawler.js",
+  "scripts": {
+    "test": "jasmine",
+    "start": "node webCrawler.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Asac2142/webCrawler.git"
+  },
+  "author": "Andres Alban",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Asac2142/webCrawler/issues"
+  },
+  "homepage": "https://github.com/Asac2142/webCrawler#readme",
+  "dependencies": {
+    "jasmine": "^3.5.0",
+    "puppeteer": "^3.1.0"
+  }
+}
