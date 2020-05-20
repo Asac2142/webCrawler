@@ -37,6 +37,24 @@ const scrape = async () => {
     return result;
 };
 
+const filterByTitleLength = (length, condition, scrapeData) => {
+    return condition === 'greater' ?
+        scrapeData.filter(data => data['title'].length > length) :
+        scrapeData.filter(data => data['title'].length <= length);
+};
+
+const sortBy = (parameter, scrapeData) => {
+    return scrapeData.sort((a, b) => +a[parameter] - (+b[parameter]));
+};
+
 scrape().then((scrapeData) => {
-    console.log(scrapeData);
+    const length = 5;
+    const condition = 'greater';
+    const parameter = 'score';
+
+    const filteredScrapeData = filterByTitleLength(length, condition, scrapeData);        
+    const sortedScrapeData = sortBy(parameter, filteredScrapeData);
+
+    console.log(`Scrape data filtered by length [${length}], condition [${condition}] :`, filteredScrapeData);
+    console.log(`Scrape data sorted by parameter [${parameter}] :`, sortedScrapeData);
 });
