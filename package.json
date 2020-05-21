@@ -5,7 +5,7 @@
   "main": "webCrawler.js",
   "scripts": {
     "test": "jasmine",
-    "start": "node webCrawler.js"
+    "start": "node src/webCrawler.js"
   },
   "repository": {
     "type": "git",
