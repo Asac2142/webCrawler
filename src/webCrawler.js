@@ -1,8 +1,9 @@
 const puppeter = require('puppeteer');
-const url = 'https://news.ycombinator.com/';
+const length = 5;
+let filteredScrapeData, sortedScrapeData;
+let condition, parameter;
 
-
-const scrape = async () => {
+const scrape = async (url) => {
     const browser = await puppeter.launch({ headless: false });
     const page = await browser.newPage();
 
@@ -47,14 +48,24 @@ const sortBy = (parameter, scrapeData) => {
     return scrapeData.sort((a, b) => +a[parameter] - (+b[parameter]));
 };
 
-scrape().then((scrapeData) => {
-    const length = 5;
-    const condition = 'greater';
-    const parameter = 'score';
+// Test
+scrape('https://news.ycombinator.com/').then((scrapeData) => {
+    condition = 'greater';
+    parameter = 'score';
+    filteredScrapeData = filterByTitleLength(length, condition, scrapeData);
+    sortedScrapeData = sortBy(parameter, filteredScrapeData);
+    console.log(`Scrape data filtered by length [${length}], condition [${condition}] :`, filteredScrapeData);
+    console.log(`Scrape data sorted by parameter [${parameter}] :`, sortedScrapeData);
 
-    const filteredScrapeData = filterByTitleLength(length, condition, scrapeData);        
-    const sortedScrapeData = sortBy(parameter, filteredScrapeData);
-
+    condition = 'less than';
+    parameter = 'comments';
+    filteredScrapeData = filterByTitleLength(length, condition, scrapeData);
+    sortedScrapeData = sortBy(parameter, filteredScrapeData);
     console.log(`Scrape data filtered by length [${length}], condition [${condition}] :`, filteredScrapeData);
     console.log(`Scrape data sorted by parameter [${parameter}] :`, sortedScrapeData);
 });
+
+
+exports.scrape = scrape;
+exports.filterByTitleLength = filterByTitleLength;
+exports.sortBy = sortBy;
